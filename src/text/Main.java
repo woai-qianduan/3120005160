@@ -14,24 +14,32 @@ public class Main {
     }
     public static String getTextFromURL(String URL) throws IOException {
         StringBuilder text= new StringBuilder();
-        BufferedReader brin=new BufferedReader(new FileReader(URL));
-        String temp;
-        int flag=0;
-        while ((temp=brin.readLine())!=null){
-            if(flag!=0){
-                text.append("\n");
-                text.append(temp);
-            }else {
-                text.append(temp);
-                flag=1;
+        try {
+            BufferedReader brin = new BufferedReader(new FileReader(URL));
+            String temp;
+            int flag=0;
+            while ((temp=brin.readLine())!=null){
+                if(flag!=0){
+                    text.append("\n");
+                    text.append(temp);
+                }else {
+                    text.append(temp);
+                    flag=1;
+                }
             }
+            brin.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("地址有误");
         }
-        brin.close();
         return text.toString();
     }
     public static void setResultText(String URL,String text) throws IOException {
-        BufferedWriter bout=new BufferedWriter(new FileWriter(URL));
-        bout.write(text);
-        bout.close();
+        try{
+            BufferedWriter bout=new BufferedWriter(new FileWriter(URL));
+            bout.write(text);
+            bout.close();
+        } catch (FileNotFoundException e){
+            System.out.println("地址有误");
+        }
     }
 }
