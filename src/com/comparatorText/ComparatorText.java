@@ -93,7 +93,7 @@ public class ComparatorText {
 
     private static void getWordVectorFromFrequencyTable(Map<String,Double> frequencyTable,List<Double> wordVector,List<String> vocabulary){
         for (String word : vocabulary) {
-            double value = 0.0;
+            double value = 0.00;
             if(frequencyTable.containsKey(word)){
                 value = frequencyTable.get(word);
             }
